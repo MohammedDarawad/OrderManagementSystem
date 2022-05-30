@@ -87,6 +87,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>oms</finalName>
     </build>
 
 </project>
