@@ -1,8 +1,6 @@
 package com.webservices.oms.ordermanagementsystem.service.impl;
 
-import com.webservices.oms.ordermanagementsystem.dto.OrderDTO;
 import com.webservices.oms.ordermanagementsystem.dto.ProductOrderDTO;
-import com.webservices.oms.ordermanagementsystem.dto.StockDTO;
 import com.webservices.oms.ordermanagementsystem.entity.*;
 import com.webservices.oms.ordermanagementsystem.exception.ResourceNotFoundException;
 import com.webservices.oms.ordermanagementsystem.repository.CustomerRepository;
@@ -14,9 +12,7 @@ import com.webservices.oms.ordermanagementsystem.service.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

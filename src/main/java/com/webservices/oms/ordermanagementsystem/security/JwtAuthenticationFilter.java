@@ -21,8 +21,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
-//    @Autowired
-//    private CustomUserDetailsService customUserDetailsService;
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -35,14 +35,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // get username from token
             String username = tokenProvider.getUsernameFromJWT(token);
             // load user associated with token
-//            UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
 
-//            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-//                    userDetails, null, userDetails.getAuthorities()
-//            )
-//            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                    userDetails, null, userDetails.getAuthorities()
+            );
+            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 //            // set spring security
-//            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
         filterChain.doFilter(request, response);
     }

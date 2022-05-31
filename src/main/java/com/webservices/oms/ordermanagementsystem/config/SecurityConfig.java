@@ -1,5 +1,6 @@
 package com.webservices.oms.ordermanagementsystem.config;
 
+import com.webservices.oms.ordermanagementsystem.security.CustomUserDetailsService;
 import com.webservices.oms.ordermanagementsystem.security.JwtAuthenticationEntryPoint;
 import com.webservices.oms.ordermanagementsystem.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration //Spring configuration class, Annotating a class with the @Configuration indicates that the class can be used by the Spring IoC container as a source of bean definitions.
+@Configuration
+//Spring configuration class, Annotating a class with the @Configuration indicates that the class can be used by the Spring IoC container as a source of bean definitions.
 /**
  * The WebSecurityConfig class is annotated with @EnableWebSecurity to enable Spring Security’s web security support and provide the Spring MVC integration. It also extends WebSecurityConfigurerAdapter and overrides a couple of its methods to set some specifics of the web security configuration.
  *
@@ -30,19 +32,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private CustomUserDetailsService userDetailsService;
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
 
     @Autowired
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter(){
-        return  new JwtAuthenticationFilter();
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter();
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -57,22 +59,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/product/**").permitAll()
-                .antMatchers("/stock/**").permitAll()
-                .antMatchers("/customer/**").permitAll()
-                .antMatchers("/order/**/**").permitAll()
-                .antMatchers("/api/v1/auth/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
                 .antMatchers("/v2/api-docs/**").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/webjars/**").permitAll();
+                .antMatchers("/webjars/**").permitAll()
+                .anyRequest()
+                .authenticated();
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService)
-//                .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override

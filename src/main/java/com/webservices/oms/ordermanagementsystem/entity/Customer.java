@@ -23,4 +23,7 @@ public class Customer {
     private String lastName;
     @Column(name = "bornAt")
     private Date bornAt;
+
+    private String email;
+    private String password;
 }
