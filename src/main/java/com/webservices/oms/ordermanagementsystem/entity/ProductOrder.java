@@ -9,22 +9,27 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="product_order")
-@IdClass(ProductOrderId.class)
+@Table(name = "product_order")
+//@IdClass(ProductOrderId.class)
 @Entity
 public class ProductOrder {
+    @EmbeddedId
+    private ProductOrderId pk;
 
-    @Id
     @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "productid", nullable = false)
+    @MapsId("productId")
     private Product product;
 
-    @Id
+
     @ManyToOne(optional = false)
-    @JoinColumn(name = "order_id", nullable = false)
+    @JoinColumn(name = "orderid", nullable = false)
+    @MapsId("orderId")
     private Order order;
 
     private int quantity;
     private double price;
     private double vat;
+
+
 }

@@ -8,10 +8,12 @@ import com.webservices.oms.ordermanagementsystem.repository.CustomerRepository;
 import com.webservices.oms.ordermanagementsystem.repository.OrderRepository;
 import com.webservices.oms.ordermanagementsystem.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
@@ -59,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
         return orderDTO;
     }
 
-    private Order mapToEntity(OrderDTO orderDTO) {
+    public Order mapToEntity(OrderDTO orderDTO) {
         Order order = new Order();
         order.setId(orderDTO.getId());
         order.setOrderedAt(orderDTO.getOrderedAt());

@@ -1,6 +1,7 @@
 package com.webservices.oms.ordermanagementsystem.service;
 
 import com.webservices.oms.ordermanagementsystem.dto.OrderDTO;
+import com.webservices.oms.ordermanagementsystem.entity.Order;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface OrderService {
     OrderDTO addOrder(OrderDTO orderDTO, int customerId);
 
     void removeOrder(int orderId);
+
+    Order mapToEntity (OrderDTO orderDTO);
 }
