@@ -18,7 +18,7 @@ public class ProductResource {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
         return ResponseEntity.ok().body(productService.getAllProducts());
     }
@@ -28,7 +28,7 @@ public class ProductResource {
         return ResponseEntity.ok(productService.getProductById(productId));
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO, @PathVariable(value = "categoryId") int categoryId) {
         return new ResponseEntity<>(productService.addProduct(productDTO, categoryId), HttpStatus.CREATED);
     }

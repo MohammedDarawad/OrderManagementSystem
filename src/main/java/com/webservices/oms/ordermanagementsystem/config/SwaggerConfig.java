@@ -19,11 +19,11 @@ public class SwaggerConfig {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
-    private ApiKey apiKey(){
+    private ApiKey apiKey() {
         return new ApiKey("JWT", AUTHORIZATION_HEADER, "header");
     }
 
-    private ApiInfo apiInfo(){
+    private ApiInfo apiInfo() {
         return new ApiInfo(
                 "Spring Boot OMS REST APIs",
                 "Spring Boot OMS REST API Documentation",
@@ -38,10 +38,11 @@ public class SwaggerConfig {
 
     /**
      * In order to create Swagger docket
+     *
      * @return
      */
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .securityContexts(Arrays.asList(securityContext()))
@@ -52,11 +53,11 @@ public class SwaggerConfig {
                 .build();
     }
 
-    private SecurityContext securityContext(){
+    private SecurityContext securityContext() {
         return SecurityContext.builder().securityReferences(defaultAuth()).build();
     }
 
-    private List<SecurityReference> defaultAuth(){
+    private List<SecurityReference> defaultAuth() {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         /*
          * For example, scope could be read, write, and specific API in OAuth2

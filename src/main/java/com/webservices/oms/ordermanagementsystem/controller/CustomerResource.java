@@ -16,23 +16,23 @@ public class CustomerResource {
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/")
-    public ResponseEntity<List<CustomerDTO>> getAllProducts() {
+    @GetMapping
+    public ResponseEntity<List<CustomerDTO>> getAllCustomers() {
         return ResponseEntity.ok().body(customerService.getAllCustomers());
     }
 
     @GetMapping("/{id}}")
-    public ResponseEntity<CustomerDTO> getProductById(@PathVariable(name = "id") int productId) {
-        return ResponseEntity.ok(customerService.getCustomerById(productId));
+    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable(name = "id") int customerId) {
+        return ResponseEntity.ok(customerService.getCustomerById(customerId));
     }
 
-    @PostMapping("/")
-    public ResponseEntity<CustomerDTO> createProduct(@Valid @RequestBody CustomerDTO customerDTO) {
+    @PostMapping
+    public ResponseEntity<CustomerDTO> createCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
         return new ResponseEntity<>(customerService.addCustomer(customerDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}}")
-    public ResponseEntity<String> deleteProduct(@PathVariable(name = "id") int customerId) {
+    public ResponseEntity<String> deleteCustomer(@PathVariable(name = "id") int customerId) {
         customerService.removeCustomer(customerId);
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
     }

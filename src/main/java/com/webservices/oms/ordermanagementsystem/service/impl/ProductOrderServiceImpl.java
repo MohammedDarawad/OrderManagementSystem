@@ -46,7 +46,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
     }
 
     @Override
-    public ProductOrderDTO addProductOrder(ProductOrderDTO productOrderDTO, int customerId) {
+    public ProductOrderDTO addProductOrder(ProductOrderDTO productOrderDTO) {
         ProductOrder productOrder = mapToEntity(productOrderDTO);
 
         int orderId = productOrderDTO.getOrderId();

@@ -16,7 +16,7 @@ public class StockResource {
     @Autowired
     private StockService stockService;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<StockDTO>> getAllStocks() {
         return ResponseEntity.ok().body(stockService.getAllStocks());
     }
