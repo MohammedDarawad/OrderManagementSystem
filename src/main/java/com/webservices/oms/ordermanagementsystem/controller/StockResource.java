@@ -21,7 +21,7 @@ public class StockResource {
         return ResponseEntity.ok().body(stockService.getAllStocks());
     }
 
-    @GetMapping("/{id}}")
+    @GetMapping("/{id}")
     public ResponseEntity<StockDTO> getStockById(@PathVariable(name = "id") int stockId) {
         return ResponseEntity.ok(stockService.getStockById(stockId));
     }
@@ -31,7 +31,7 @@ public class StockResource {
         return new ResponseEntity<>(stockService.addStock(stockDTO, productId), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteStock(@PathVariable(name = "id") int stockId) {
         stockService.removeStock(stockId);
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);

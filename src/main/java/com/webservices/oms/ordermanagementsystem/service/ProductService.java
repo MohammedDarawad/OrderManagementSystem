@@ -9,7 +9,7 @@ public interface ProductService {
 
     ProductDTO getProductById(int productId);
 
-    ProductDTO addProduct(ProductDTO productDTO, int categoryId);
+    ProductDTO addProduct(ProductDTO productDTO);
 
     void removeProduct(int productId);
 }

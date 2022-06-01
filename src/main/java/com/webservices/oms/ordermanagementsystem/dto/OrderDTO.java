@@ -12,4 +12,5 @@ import java.time.LocalDateTime;
 public class OrderDTO {
     private int Id;
     private LocalDateTime orderedAt;
+    private int customerId;
 }

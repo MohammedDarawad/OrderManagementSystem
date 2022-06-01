@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDTO addProduct(ProductDTO productDTO, int categoryId) {
+    public ProductDTO addProduct(ProductDTO productDTO) {
         Product product = mapToEntity(productDTO);
 
         Product newProduct = productRepository.save(product);

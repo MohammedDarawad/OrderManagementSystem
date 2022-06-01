@@ -43,22 +43,17 @@ public class OrderResource {
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
     }
 
-    @PostMapping("/ProductOrders")
+    @PostMapping("/ProductOrders/{customerId}")
     public ResponseEntity<ProductOrderDTO> createProductOrder(@Valid @RequestBody ProductOrderDTO productOrderDTO, @Valid @PathVariable(name = "customerId") int customerId) {
-        return new ResponseEntity<>(productOrderService.addProductOrder(productOrderDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(productOrderService.addProductOrder(productOrderDTO,customerId), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}}")
+    @GetMapping("/{id}")
     public ResponseEntity<OrderDTO> getOrderById(@PathVariable(name = "id") int customerId) {
         return ResponseEntity.ok(orderService.getOrderById(customerId));
     }
 
-    @PostMapping("/{customerId}")
-    public ResponseEntity<OrderDTO> createOrder(@Valid @RequestBody OrderDTO orderDTO, @Valid @PathVariable(name = "customerId") int customerId) {
-        return new ResponseEntity<>(orderService.addOrder(orderDTO, customerId), HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/{id}}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteOrder(@PathVariable(name = "id") int orderId) {
         orderService.removeOrder(orderId);
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);

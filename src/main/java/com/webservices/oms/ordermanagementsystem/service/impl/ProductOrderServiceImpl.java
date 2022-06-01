@@ -1,5 +1,6 @@
 package com.webservices.oms.ordermanagementsystem.service.impl;
 
+import com.webservices.oms.ordermanagementsystem.dto.OrderDTO;
 import com.webservices.oms.ordermanagementsystem.dto.ProductOrderDTO;
 import com.webservices.oms.ordermanagementsystem.entity.*;
 import com.webservices.oms.ordermanagementsystem.exception.ResourceNotFoundException;
@@ -12,6 +13,7 @@ import com.webservices.oms.ordermanagementsystem.service.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,11 +48,19 @@ public class ProductOrderServiceImpl implements ProductOrderService {
     }
 
     @Override
-    public ProductOrderDTO addProductOrder(ProductOrderDTO productOrderDTO) {
+    public ProductOrderDTO addProductOrder(ProductOrderDTO productOrderDTO, int customerId) {
         ProductOrder productOrder = mapToEntity(productOrderDTO);
 
         int orderId = productOrderDTO.getOrderId();
-        Order order = orderRepository.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order", "id", orderId));
+        Order order = new Order();
+        try {
+            order = orderRepository.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order", "id", orderId));
+        } catch (ResourceNotFoundException ex) {
+            OrderDTO orderDTO = new OrderDTO();
+            orderDTO.setOrderedAt(LocalDateTime.now());
+            order = orderRepository.save(orderService.mapToEntity(orderDTO));
+            order.setCustomer(customerRepository.findById(customerId).orElseThrow(() -> new ResourceNotFoundException("Order", "id", orderId)));
+        }
         productOrder.setOrder(order);
 
         int productId = productOrderDTO.getProductId();

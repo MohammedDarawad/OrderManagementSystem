@@ -23,17 +23,17 @@ public class ProductResource {
         return ResponseEntity.ok().body(productService.getAllProducts());
     }
 
-    @GetMapping("/{id}}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable(name = "id") int productId) {
         return ResponseEntity.ok(productService.getProductById(productId));
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO, @PathVariable(value = "categoryId") int categoryId) {
-        return new ResponseEntity<>(productService.addProduct(productDTO, categoryId), HttpStatus.CREATED);
+    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) {
+        return new ResponseEntity<>(productService.addProduct(productDTO), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable(name = "id") int productId) {
         productService.removeProduct(productId);
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);

@@ -21,19 +21,8 @@ public class CustomerResource {
         return ResponseEntity.ok().body(customerService.getAllCustomers());
     }
 
-    @GetMapping("/{id}}")
-    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable(name = "id") int customerId) {
+    @GetMapping("/{customerId}")
+    public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable(name = "customerId") int customerId) {
         return ResponseEntity.ok(customerService.getCustomerById(customerId));
-    }
-
-    @PostMapping
-    public ResponseEntity<CustomerDTO> createCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
-        return new ResponseEntity<>(customerService.addCustomer(customerDTO), HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/{id}}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable(name = "id") int customerId) {
-        customerService.removeCustomer(customerId);
-        return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
     }
 }
