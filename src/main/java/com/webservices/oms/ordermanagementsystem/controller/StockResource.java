@@ -1,5 +1,6 @@
 package com.webservices.oms.ordermanagementsystem.controller;
 
+import com.webservices.oms.ordermanagementsystem.dto.CustomerDTO;
 import com.webservices.oms.ordermanagementsystem.dto.StockDTO;
 import com.webservices.oms.ordermanagementsystem.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,10 @@ public class StockResource {
     public ResponseEntity<String> deleteStock(@PathVariable(name = "id") int stockId) {
         stockService.removeStock(stockId);
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<StockDTO> updateStock(@Valid @RequestBody StockDTO stockDTO) {
+        return ResponseEntity.ok(stockService.updateStock(stockDTO));
     }
 }

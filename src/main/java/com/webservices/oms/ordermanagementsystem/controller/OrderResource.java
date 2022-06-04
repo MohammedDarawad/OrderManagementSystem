@@ -21,7 +21,6 @@ public class OrderResource {
     @Autowired
     private ProductOrderService productOrderService;
 
-
     @GetMapping
     public ResponseEntity<List<OrderDTO>> getAllOrders() {
         return ResponseEntity.ok().body(orderService.getAllOrders());
@@ -45,7 +44,7 @@ public class OrderResource {
 
     @PostMapping("/ProductOrders/{customerId}")
     public ResponseEntity<ProductOrderDTO> createProductOrder(@Valid @RequestBody ProductOrderDTO productOrderDTO, @Valid @PathVariable(name = "customerId") int customerId) {
-        return new ResponseEntity<>(productOrderService.addProductOrder(productOrderDTO,customerId), HttpStatus.CREATED);
+        return new ResponseEntity<>(productOrderService.addProductOrder(productOrderDTO, customerId), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

@@ -1,12 +1,15 @@
 package com.webservices.oms.ordermanagementsystem.service.impl;
 
 import com.webservices.oms.ordermanagementsystem.dto.ProductDTO;
+import com.webservices.oms.ordermanagementsystem.dto.StockDTO;
 import com.webservices.oms.ordermanagementsystem.entity.Product;
+import com.webservices.oms.ordermanagementsystem.entity.Stock;
 import com.webservices.oms.ordermanagementsystem.exception.ResourceNotFoundException;
 import com.webservices.oms.ordermanagementsystem.repository.ProductRepository;
 import com.webservices.oms.ordermanagementsystem.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +43,22 @@ public class ProductServiceImpl implements ProductService {
 
         ProductDTO productResponse = mapToDTO(newProduct);
         return productResponse;
+    }
+
+    @Override
+    public ProductDTO updateProduct(ProductDTO productDTO) {
+        int productID = productDTO.getId();
+        Product product = productRepository.findById(productID).orElseThrow(() -> new ResourceNotFoundException("Product", "id", productID));
+
+        product.setSlug(productDTO.getSlug());
+        product.setStockable(productDTO.isStockable());
+        product.setReference(productDTO.getReference());
+        product.setVat(productDTO.getVat());
+        product.setPrice(productDTO.getPrice());
+        product.setName(productDTO.getName());
+
+        Product updatedProduct = productRepository.save(product);
+        return mapToDTO(updatedProduct);
     }
 
     @Override

@@ -43,6 +43,19 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
+        Customer customer = customerRepository.findById(customerDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Customer", "id", customerDTO.getId()));
+
+        customer.setBornAt(customerDTO.getBornAt());
+        customer.setFirstName(customerDTO.getFirstName());
+        customer.setLastName(customerDTO.getLastName());
+        customer.setEmail(customerDTO.getEmail());
+
+        Customer updatedCustomer = customerRepository.save(customer);
+        return mapToDTO(updatedCustomer);
+    }
+
+    @Override
     public void removeCustomer(int customerId) {
         Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new ResourceNotFoundException("Customer", "id", customerId));
         customerRepository.delete(customer);

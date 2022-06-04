@@ -10,6 +10,7 @@ import com.webservices.oms.ordermanagementsystem.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,13 +30,25 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public StockDTO updateStock(StockDTO stockDTO) {
+        int stockId = stockDTO.getId();
+        Stock stock = stockRepository.findById(stockId).orElseThrow(() -> new ResourceNotFoundException("Stock", "id", stockId));
+
+        stock.setQuantity(stockDTO.getQuantity());
+        stock.setUpdatedAt(LocalDateTime.now());
+
+        Stock updateStock = stockRepository.save(stock);
+        return mapToDTO(updateStock);
+    }
+
+    @Override
     public StockDTO getStockById(int stockId) {
         Stock stock = stockRepository.findById(stockId).orElseThrow(() -> new ResourceNotFoundException("Stock", "id", stockId));
         return mapToDTO(stock);
     }
 
     @Override
-    public StockDTO addStock(StockDTO stockDTO,int productId) {
+    public StockDTO addStock(StockDTO stockDTO, int productId) {
         Stock stock = mapToEntity(stockDTO);
 
         Product product = productRepository.findById(productId).orElseThrow(

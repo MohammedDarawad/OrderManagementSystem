@@ -68,8 +68,6 @@ public class AuthController {
         customer.setBornAt(signUpDto.getBornAt());
         customer.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
 
-//        user.setRoles(Collections.singleton(roles));
-
         customerRepository.save(customer);
 
         return new ResponseEntity<>("User registered successfully", HttpStatus.OK);

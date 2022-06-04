@@ -1,6 +1,7 @@
 package com.webservices.oms.ordermanagementsystem.controller;
 
 import com.webservices.oms.ordermanagementsystem.dto.ProductDTO;
+import com.webservices.oms.ordermanagementsystem.dto.StockDTO;
 import com.webservices.oms.ordermanagementsystem.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,5 +38,10 @@ public class ProductResource {
     public ResponseEntity<String> deleteProduct(@PathVariable(name = "id") int productId) {
         productService.removeProduct(productId);
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<ProductDTO> updateProduct(@Valid @RequestBody ProductDTO productDTO) {
+        return ResponseEntity.ok(productService.updateProduct(productDTO));
     }
 }

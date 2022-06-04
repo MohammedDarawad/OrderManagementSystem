@@ -9,6 +9,8 @@ public interface CustomerService {
 
     CustomerDTO getCustomerById(int customerId);
 
+    CustomerDTO updateCustomer(CustomerDTO customerDTO);
+
     CustomerDTO addCustomer(CustomerDTO customerDTO);
 
     void removeCustomer(int customerId);
