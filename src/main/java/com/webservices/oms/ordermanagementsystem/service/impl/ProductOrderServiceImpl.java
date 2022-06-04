@@ -70,7 +70,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         pk.setOrderId(productOrderDTO.getOrderId());
         pk.setProductId(productOrderDTO.getProductId());
         productOrder.setPk(pk);
-
+        productOrder.setPrice(product.getPrice() * productOrderDTO.getQuantity());
         ProductOrder newProductOrder = productOrderRepository.save(productOrder);
 
         return mapToDTO(newProductOrder);
