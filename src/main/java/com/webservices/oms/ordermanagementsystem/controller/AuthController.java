@@ -70,7 +70,7 @@ public class AuthController {
 
         customerRepository.save(customer);
 
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
 
     }
 }
