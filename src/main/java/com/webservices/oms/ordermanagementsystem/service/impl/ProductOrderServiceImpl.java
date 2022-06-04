@@ -77,6 +77,21 @@ public class ProductOrderServiceImpl implements ProductOrderService {
     }
 
     @Override
+    public ProductOrderDTO updateProductOrder(ProductOrderDTO productOrderDTO) {
+        int orderId = productOrderDTO.getOrderId();
+        int productId = productOrderDTO.getProductId();
+
+        ProductOrder productOrder = productOrderRepository.findByOrderIdAndProductId(orderId, productId);
+
+        productOrder.setQuantity(productOrderDTO.getQuantity());
+        productOrder.setVat(productOrderDTO.getVat());
+        productOrder.setPrice(productOrderDTO.getPrice());
+
+        ProductOrder productDTO = productOrderRepository.save(productOrder);
+        return mapToDTO(productDTO);
+    }
+
+    @Override
     public void removeProductOrder(int orderId, int productId) {
         ProductOrder productOrder = productOrderRepository.findByOrderIdAndProductId(orderId, productId);
         productOrderRepository.delete(productOrder);

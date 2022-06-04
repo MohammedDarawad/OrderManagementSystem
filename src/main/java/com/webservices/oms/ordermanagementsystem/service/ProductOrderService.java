@@ -11,7 +11,9 @@ public interface ProductOrderService {
 
     List<ProductOrderDTO> getProductOrdersByOrderId(int orderId);
 
-    ProductOrderDTO addProductOrder(ProductOrderDTO productOrder,int customerId);
+    ProductOrderDTO addProductOrder(ProductOrderDTO productOrder, int customerId);
 
     void removeProductOrder(int orderId, int customerId);
+
+    ProductOrderDTO updateProductOrder(ProductOrderDTO productOrderDTO);
 }

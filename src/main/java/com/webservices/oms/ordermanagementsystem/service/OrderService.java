@@ -1,6 +1,8 @@
 package com.webservices.oms.ordermanagementsystem.service;
 
 import com.webservices.oms.ordermanagementsystem.dto.OrderDTO;
+import com.webservices.oms.ordermanagementsystem.dto.ProductDTO;
+import com.webservices.oms.ordermanagementsystem.dto.ProductOrderDTO;
 import com.webservices.oms.ordermanagementsystem.entity.Order;
 
 import java.util.List;

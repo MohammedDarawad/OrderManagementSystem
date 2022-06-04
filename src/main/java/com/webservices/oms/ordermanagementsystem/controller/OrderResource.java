@@ -1,6 +1,7 @@
 package com.webservices.oms.ordermanagementsystem.controller;
 
 import com.webservices.oms.ordermanagementsystem.dto.OrderDTO;
+import com.webservices.oms.ordermanagementsystem.dto.ProductDTO;
 import com.webservices.oms.ordermanagementsystem.dto.ProductOrderDTO;
 import com.webservices.oms.ordermanagementsystem.service.OrderService;
 import com.webservices.oms.ordermanagementsystem.service.ProductOrderService;
@@ -26,25 +27,30 @@ public class OrderResource {
         return ResponseEntity.ok().body(orderService.getAllOrders());
     }
 
-    @GetMapping("/ProductOrders")
+    @GetMapping("/productOrder")
     public ResponseEntity<List<ProductOrderDTO>> getAllProductOrders() {
         return ResponseEntity.ok().body(productOrderService.getAllProductOrders());
     }
 
-    @GetMapping("/ProductOrders/{orderId}")
+    @GetMapping("/productOrder/{orderId}")
     public ResponseEntity<List<ProductOrderDTO>> getProductOrderByOrderId(@PathVariable(name = "orderId") int orderId) {
         return ResponseEntity.ok().body(productOrderService.getProductOrdersByOrderId(orderId));
     }
 
-    @DeleteMapping("/ProductOrders/{orderId}/{productId}")
+    @DeleteMapping("/productOrder/{orderId}/{productId}")
     public ResponseEntity<String> deleteProductOrder(@Valid @PathVariable(name = "orderId") int orderId, @Valid @PathVariable(name = "productId") int productId) {
         productOrderService.removeProductOrder(orderId, productId);
         return new ResponseEntity<>("Deleted successfully.", HttpStatus.OK);
     }
 
-    @PostMapping("/ProductOrders/{customerId}")
+    @PostMapping("/productOrder/{customerId}")
     public ResponseEntity<ProductOrderDTO> createProductOrder(@Valid @RequestBody ProductOrderDTO productOrderDTO, @Valid @PathVariable(name = "customerId") int customerId) {
         return new ResponseEntity<>(productOrderService.addProductOrder(productOrderDTO, customerId), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/productOrder")
+    public ResponseEntity<ProductOrderDTO> updateProductOrder(@Valid @RequestBody ProductOrderDTO productOrderDTO) {
+        return ResponseEntity.ok(productOrderService.updateProductOrder(productOrderDTO));
     }
 
     @GetMapping("/{id}")
