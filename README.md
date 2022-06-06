@@ -1,3 +1,5 @@
+Docker hub link: https://hub.docker.com/r/moe202/docker-sample 
+
 | HTTPS method | URL path                              | HTTP status code | description                                                    |
 |--------------|---------------------------------------|------------------|----------------------------------------------------------------|
 | POST         | /auth/signin                          | 200 (OK)         | to allow customer to sign in and get the JWT access token      |
