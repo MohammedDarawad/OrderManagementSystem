@@ -1,5 +1,6 @@
 Docker hub link: https://hub.docker.com/r/moe202/docker-sample 
 
+
 | HTTPS method | URL path                              | HTTP status code | description                                                    |
 |--------------|---------------------------------------|------------------|----------------------------------------------------------------|
 | POST         | /auth/signin                          | 200 (OK)         | to allow customer to sign in and get the JWT access token      |
@@ -29,3 +30,6 @@ Docker hub link: https://hub.docker.com/r/moe202/docker-sample
 | PUT          | /stock                                | 200 (OK)         | to update a stocks information                                 |
 | DELETE       | /stock/stockId                        | 200 (OK)         | to delete a stocks                                             |
 | POST         | /stock/productId                      | 201 (CREATED)    | to create a new stock for a product                            |
+
+
+to build the docker image u used the docker-compose file to compose my docekr image with a mysql image and then executed the (docker-compose up) command
