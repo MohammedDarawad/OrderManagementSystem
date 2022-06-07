@@ -33,3 +33,4 @@ Docker hub link: https://hub.docker.com/r/moe202/docker-sample
 
 
 to build the docker image i used the docker-compose file to compose my docekr image with a mysql image and then executed the (docker-compose up) command
+the docker-compose file has the command (bild: .) which allows it to build the image then compose it
