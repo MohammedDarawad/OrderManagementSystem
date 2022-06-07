@@ -32,4 +32,4 @@ Docker hub link: https://hub.docker.com/r/moe202/docker-sample
 | POST         | /stock/productId                      | 201 (CREATED)    | to create a new stock for a product                            |
 
 
-to build the docker image u used the docker-compose file to compose my docekr image with a mysql image and then executed the (docker-compose up) command
+to build the docker image i used the docker-compose file to compose my docekr image with a mysql image and then executed the (docker-compose up) command
